@@ -1,0 +1,25 @@
+pipeline
+ {
+  agent any
+  stages{
+   stage('maven build'){
+   steps{
+   bat 'mvn clean install'
+   }
+   }
+   
+   
+   stage('maven Munit test'){
+   steps{
+   bat 'mvn test'
+   }
+   }
+   
+   
+   stage('maven deploy'){
+   steps {
+   bat 'mvn package deploy -DmuleDeploy'
+   }
+   }
+}
+}

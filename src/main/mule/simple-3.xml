@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="04246ad3-3fca-4164-b7c2-91fc9813c0fa" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="simple-3Flow" doc:id="b86d806f-e21c-4c6e-bced-12c640a9d008" >
+		<http:listener doc:name="Listener" doc:id="c0684a7a-2ee6-4f49-bbe1-cb805a182182" config-ref="HTTP_Listener_config" path="/simple3"/>
+		<set-payload value='#["message: Deployment is successful"]' doc:name="Set Payload" doc:id="5b274ca6-1e58-4369-87fd-55be19338b26" />
+		<ee:transform doc:name="Transform Message" doc:id="add3c743-595e-4f4f-a6c4-f5a043ac00b4" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+payload]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd">
+	<munit:config name="simple-3-test-suite.xml" />
+	<munit:test name="simple-3-test-suite-simple-3FlowTest" doc:id="d8008273-cd0b-4896-9ace-1b53b0d45046" description="Test">
+		<munit:execution >
+			<munit:set-null-payload doc:name="Set null payload" doc:id="ca89c1fd-7f16-4207-928a-8d652de47b23" />
+			<flow-ref doc:name="Flow-ref to simple-3Flow" doc:id="8917cf27-7c07-4b7a-a429-3d09031ad511" name="simple-3Flow"/>
+		</munit:execution>
+		<munit:validation >
+			<munit-tools:assert-that doc:name="Assert that" doc:id="72533a7a-2087-462c-b24e-f2120b6afc41" is="#[MunitTools::both(MunitTools::notNullValue(), MunitTools::equalTo('message: Deployment is successful'))]" expression="#[payload]"/>
+		</munit:validation>
+	</munit:test>
+
+
+</mule>
